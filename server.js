@@ -6,19 +6,31 @@ const {shuffleArray} = require('./utils')
 
 app.use(express.json())
 
-var Rollbar = require("rollbar");
-var rollbar = new Rollbar({
-  accessToken: 'fc321f49a5dd42fda165a3ed435c2205',
-  captureUncaught: true,
-  captureUnhandledRejections: true
-});
-
-// record a generic message and send it to Rollbar
-rollbar.log("Hello world!");
 
 app.get('/',function (req, res) {
     res.sendFile(path.join(__dirname, 'public/index.html'))
+    console.log(path.join(__dirname, 'public/index.html'))
 })
+
+app.get('/styles',function (req, res) {
+    res.sendFile(path.join(__dirname, 'public/index.css'))
+    })
+
+app.get('/js',function (req, res) {
+    res.sendFile(path.join(__dirname, 'public/index.js'))
+    })
+
+// var Rollbar = require("rollbar");
+// var rollbar = new Rollbar({
+//   accessToken: 'fc321f49a5dd42fda165a3ed435c2205',
+//   captureUncaught: true,
+//   captureUnhandledRejections: true
+// });
+
+// record a generic message and send it to Rollbar
+// rollbar.log("Hello world!");
+
+
 
 
 app.get('/api/robots', (req, res) => {
@@ -41,15 +53,7 @@ app.get('/api/robots/five', (req, res) => {
         res.sendStatus(400)
     }
 })
-app.get('/',function (req, res) {
-    res.sendFile(path.join(__dirname, 'public/index.html'))
-})
-app.get('/css', (req, res) => {
-    res.sendFile(path.join(__dirname, '../index.css'))
-})
-app.get('/js', (req, res) => {
-    res.sendFile(path.join(__dirname, '../index.js'))
-})
+
 
 app.post('/api/duel', (req, res) => {
     try {
