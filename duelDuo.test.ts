@@ -20,7 +20,12 @@ test('Title shows up when page loads', async () => {
 })
 
 
-test('add game', async ()=> {
+test(' game', async ()=> {
     await driver.findElement(By.xpath('//input')).sendKeys('new')
     await driver.findElement(By.xpath('//button')).click()
+})
+
+test('delete game', async() => {
+    await driver.findElement(By.css('#New Game')).sendKeys('Delete')
+    
 })
