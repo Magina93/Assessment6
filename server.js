@@ -6,14 +6,20 @@ const {shuffleArray} = require('./utils')
 
 app.use(express.json())
 
+var Rollbar = require("rollbar");
+var rollbar = new Rollbar({
+  accessToken: 'fc321f49a5dd42fda165a3ed435c2205',
+  captureUncaught: true,
+  captureUnhandledRejections: true
+});
+
+// record a generic message and send it to Rollbar
+rollbar.log("Hello world!");
+
 app.get('/',function (req, res) {
     res.sendFile(path.join(__dirname, 'public/index.html'))
 })
-const port = process.env.PORT || 3000
 
-app.listen(port, () => {
-  console.log(`Listening on port ${port}`)
-})
 
 app.get('/api/robots', (req, res) => {
     try {
@@ -83,5 +89,14 @@ app.get('/api/player', (req, res) => {
         console.log('ERROR GETTING PLAYER STATS', error)
         res.sendStatus(400)
     }
+})
+
+
+
+
+const port = process.env.PORT || 3000
+
+app.listen(port, () => {
+  console.log(`Listening on port ${port}`)
 })
 

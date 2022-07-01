@@ -18,3 +18,9 @@ test('Title shows up when page loads', async () => {
     const displayed = await title.isDisplayed()
     expect(displayed).toBe(true)
 })
+
+
+test('add game', async ()=> {
+    await driver.findElement(By.xpath('//input')).sendKeys('new')
+    await driver.findElement(By.xpath('//button')).click()
+})
