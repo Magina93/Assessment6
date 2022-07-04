@@ -20,12 +20,22 @@ test('Title shows up when page loads', async () => {
 })
 
 
-test(' game', async ()=> {
-    await driver.findElement(By.xpath('//input')).sendKeys('new')
-    await driver.findElement(By.xpath('//button')).click()
+test('"Draw" button displays choices section', async ()=> {
+    await driver.findElement(By.id('draw')).click()
+    const choicesSection = await driver.findElement(By.id('choices'))
+    const displayed = await choicesSection.isDisplayed()
+    expect(displayed).toBe(true)
+    await driver.sleep(6000)
 })
 
-test('delete game', async() => {
-    await driver.findElement(By.css('#New Game')).sendKeys('Delete')
-    
+
+
+
+test('"Add to duo"button displaysthe player duo section',async () => {
+    await driver.findElement(By.id('draw')).click()
+    await driver.findElement(By.css('.bot-btn')).click()
+    const playerDuoSection = await driver.findElement(By.id('player-duo'))
+    const displayed = await playerDuoSection.isDisplayed()
+    expect(displayed).toBe(true)
+    await driver.sleep(8000)
 })
